@@ -22,6 +22,9 @@ var http = {
     post: function(url, params, headers, success, failure) {
         return exec(success, failure, "CordovaHttpPlugin", "post", [url, params, headers]);
     },
+    postRaw: function(url, rawData, headers, success, failure) {
+        return exec(success, failure, "CordovaHttpPlugin", "postRaw", [url, rawData, headers]);
+    },
     get: function(url, params, headers, success, failure) {
         return exec(success, failure, "CordovaHttpPlugin", "get", [url, params, headers]);
     },
@@ -50,7 +53,7 @@ var http = {
          *
          * Modified by Andrew Stephan for Sync OnSet
          *
-        */
+         */
         var win = function(result) {
             var entry = new (require('org.apache.cordova.file.FileEntry'))();
             entry.isDirectory = false;
@@ -69,7 +72,7 @@ if (typeof angular !== "undefined") {
     angular.module('cordovaHTTP', []).factory('cordovaHTTP', function($timeout, $q) {
         function makePromise(fn, args, async) {
             var deferred = $q.defer();
-            
+
             var success = function(response) {
                 if (async) {
                     $timeout(function() {
@@ -79,7 +82,7 @@ if (typeof angular !== "undefined") {
                     deferred.resolve(response);
                 }
             };
-            
+
             var fail = function(response) {
                 if (async) {
                     $timeout(function() {
@@ -89,15 +92,15 @@ if (typeof angular !== "undefined") {
                     deferred.reject(response);
                 }
             };
-            
+
             args.push(success);
             args.push(fail);
-            
+
             fn.apply(http, args);
-            
+
             return deferred.promise;
         }
-        
+
         var cordovaHTTP = {
             useBasicAuth: function(username, password) {
                 return makePromise(http.useBasicAuth, [username, password]);
@@ -122,6 +125,9 @@ if (typeof angular !== "undefined") {
             },
             downloadFile: function(url, params, headers, filePath) {
                 return makePromise(http.downloadFile, [url, params, headers, filePath], true);
+            }
+            ,postRaw: function(url, rawData, headers) {
+                return makePromise(http.postRaw, [url, rawData, headers], true);
             }
         };
         return cordovaHTTP;
