@@ -114,7 +114,7 @@ public class CordovaHttpPlugin extends CordovaPlugin {
             JSONObject headers = args.getJSONObject(2);
             HashMap<String, String> headersMap = this.addToMap(this.globalHeaders, headers);
             CordovaHttpPostRaw postRaw = new CordovaHttpPostRaw(urlString, params, headersMap, callbackContext);
-            cordova.getThreadPool().execute(post);
+            cordova.getThreadPool().execute(postRaw);
         } else {
             return false;
         }

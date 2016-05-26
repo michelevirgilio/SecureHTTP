@@ -3200,12 +3200,12 @@ public class HttpRequest {
     public HttpRequest formRaw(final String rawData)
         throws HttpRequestException {
 
-        contentType(CONTENT_TYPE_FORM, CHARSET_UTF8);
+        //contentType(CONTENT_TYPE_FORM, CHARSET_UTF8);
 
-      String charset = getValidCharset(CHARSET_UTF8);
+      //String charset = getValidCharset(CHARSET_UTF8);
       try {
         openOutput();
-        output.write(URLEncoder.encode(rawData, charset));
+        output.write(rawData);
       } catch (IOException e) {
         throw new HttpRequestException(e);
       }
