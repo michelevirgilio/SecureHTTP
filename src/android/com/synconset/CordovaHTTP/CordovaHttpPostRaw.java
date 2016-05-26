@@ -18,7 +18,7 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 public class CordovaHttpPostRaw extends CordovaHttp implements Runnable {
-    public CordovaHttpPost(String urlString, String rawData, Map<String, String> headers, CallbackContext callbackContext) {
+    public CordovaHttpPostRaw(String urlString, String rawData, Map<String, String> headers, CallbackContext callbackContext) {
         super(urlString, null, headers, callbackContext);
     }
 
