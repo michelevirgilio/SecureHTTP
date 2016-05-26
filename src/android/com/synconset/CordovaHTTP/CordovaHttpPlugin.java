@@ -108,6 +108,13 @@ public class CordovaHttpPlugin extends CordovaPlugin {
             String filePath = args.getString(3);
             CordovaHttpDownload download = new CordovaHttpDownload(urlString, paramsMap, headersMap, callbackContext, filePath);
             cordova.getThreadPool().execute(download);
+        } else if (action.equals("postRaw")) {
+            String urlString = args.getString(0);
+            String params = args.getString(1);
+            JSONObject headers = args.getJSONObject(2);
+            HashMap<String, String> headersMap = this.addToMap(this.globalHeaders, headers);
+            CordovaHttpPostRaw postRaw = new CordovaHttpPostRaw(urlString, params, headersMap, callbackContext);
+            cordova.getThreadPool().execute(post);
         } else {
             return false;
         }
