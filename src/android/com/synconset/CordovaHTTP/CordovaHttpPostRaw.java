@@ -18,7 +18,11 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 public class CordovaHttpPostRaw extends CordovaHttp implements Runnable {
+
+    String _rawData;
+
     public CordovaHttpPostRaw(String urlString, String rawData, Map<String, String> headers, CallbackContext callbackContext) {
+        _rawData = rawData;
         super(urlString, null, headers, callbackContext);
     }
 
@@ -29,7 +33,7 @@ public class CordovaHttpPostRaw extends CordovaHttp implements Runnable {
             this.setupSecurity(request);
             request.acceptCharset(CHARSET);
             request.headers(this.getHeaders());
-            request.formRaw(rawData);
+            request.formRaw(_rawData);
             int code = request.code();
             String body = request.body(CHARSET);
             JSONObject response = new JSONObject();
