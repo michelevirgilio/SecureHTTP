@@ -22,8 +22,9 @@ public class CordovaHttpPostRaw extends CordovaHttp implements Runnable {
     String _rawData;
 
     public CordovaHttpPostRaw(String urlString, String rawData, Map<String, String> headers, CallbackContext callbackContext) {
-        _rawData = rawData;
         super(urlString, null, headers, callbackContext);
+        _rawData = rawData;
+
     }
 
     @Override
